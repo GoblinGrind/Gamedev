@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            DEMO
+
+        </title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html, body{
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+                background: #a0a0a0;
+            }
+
+            .overlay {
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                z-index: 2;
+                display: flex;
+            }
+
+            .bar {
+                width: 10vw;
+                height: 105vh;
+                background: #1a1a1a;
+            }
+
+            .counter {
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-end;
+                z-index: 10000;
+                color: #bcbcc4;
+                padding: 0.2em 0.4em;
+                font-size: 20vw;
+                font-family: "Carpenter"
+            }
+            
+        </style>
+
+    </head>
+    <body class = "body">
+        <h1 class = "counter">0</h1>
+        <div class = "overlay">
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+        </div>
+        <button class ='trigger-button' onclick = "">
+        PULL THE TRIGGER.
+        </button>
+        <audio id ="musicology" loop>
+            <source src ="" type ="audio/mp3">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            function startLoader() {
+                let counterElement = document.querySelector(".counter");
+                let currentValue = 0;
+
+                function updateCounter() {
+                    if (currentValue === 100){
+                        return;
+                    }
+
+                    currentValue += Math.floor(Math.random() * 10) + 4;
+                    
+                    if (currentValue > 100) {
+                        currentValue = 100;
+                    }
+                    counterElement.textContent = currentValue;
+                    let delay = Math.floor(Math.random() * 200) + 50;
+                    setTimeout(updateCounter, delay);
+                }
+                updateCounter();
+            }
+            startLoader();
+            gsap.to(".counter", 0.25, {
+                delay: 2.699,
+                opacity: 0,
+            });
+            
+            gsap.to(".bar", 1.5, {
+                delay: 1.5,
+                height: 0,
+                stagger: {
+                    amount: 0.5,
+                },
+                ease: "power4.inOut",
+            });
+
+            gsap.to(".overlay", {
+            delay: 3.59,
+            opacity: 0,
+            pointerEvents: "none",
+            onComplete: () => {
+                document.querySelector(".overlay").remove();
+            } 
+            });
+
+        </script>
+    </body>
+</html>

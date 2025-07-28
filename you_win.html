@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>this page opens when you win, CONGRATULATIONS.</title>
+        <style>
+            .html, .body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+            .hellovid {
+                width: 100vw;
+                height: 100vh;
+                object-fit: cover;
+                top: 0;
+                left: 0;
+                position: fixed;
+            }
+            .glitch {
+                position: fixed;
+                font-family: "Carpenter";
+                font-size: 12em;
+                font-weight: 600;
+                text-align: center;
+                color: whitesmoke;
+                top: 15%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 3;
+            }
+            .menwo {
+            position: fixed;
+            top: 73%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.5em 1em;
+            font-size: 2vw;
+            background-color: transparent;
+            color: whitesmoke;
+            border: none;
+            border-radius: 0.5em;
+            cursor: none;
+            opacity: 0;
+            z-index: 10001;
+            }
+            .menwo:hover {
+            background-color: rgb(111, 111, 214);
+            color: whitesmoke;
+            transform: translateX(-50%) scale(1.1);
+            }
+            .menwo:active {
+            background-color: rgb(73, 73, 211);
+            color: whitesmoke;
+            transform: translateX(-50%) scale(0.92);
+            }
+        </style>
+    </head>
+    <body>
+        <video autoplay loop class = "hellovid" playback-speed = 0.8>
+            <source src = "video/anim.mp4">
+        </video>
+        <p class = "glitch">
+            YOU WIN
+        </p>
+
+        <button class = "menwo" onclick = ' window.location.href = "play_game.html" '>
+            -[MAIN-MENU]-
+        </button>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+        <script>
+            const video = document.querySelector('.hellovid');
+            video.playbackRate = 0.8;
+
+        gsap.set(".glitch", {opacity: 0});
+        gsap.to(".glitch",{
+            opacity: 1,
+            delay: 2,
+            duration: 1.5,
+            ease: "linear"
+        });
+
+        gsap.to(".menwo",{
+            opacity: 1,
+            delay: 3.5,
+            duration: .1,
+            ease: "linear"
+        });
+        
+        </script>
+        </body>
+</html>

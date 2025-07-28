@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <head>
+        <title>
+        this is a game dev.
+        </title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html, body{
+                width: 100vw;
+                height: 100vh;
+                height: 100%;
+                overflow: hidden;
+                background: #a0a0a0;
+            }
+
+            .overlay {
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                z-index: 2;
+                display: flex;
+            }
+
+            .bar {
+                width: 10vw;
+                height: 105vh;
+                background: #1a1a1a;
+            }
+
+            .counter {
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-end;
+                z-index: 10000;
+                color: #bcbcc4;
+                padding: 0.2em 0.4em;
+                font-size: 20vw;
+                font-family: "Carpenter"
+            } 
+
+            .body {
+                background-image: url('image/revolver_russian.png');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center 65%;
+            }
+
+            .comp-button {
+                padding: 30px;
+                position: relative;
+                display: block;
+                left: 570px;
+                width: 25%;
+                font-family: 'Lucida Sans';
+                background-color: #9e1b32; 
+                text-decoration: solid;
+                color: black;
+                border: none;
+                margin-top: 30px;
+                margin-bottom: 20px;
+                gap: initial;
+                text-shadow: 0px 3px rgba(0, 0, 0, 0.155);
+                font-size: large;
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+                animation: buton 3s forwards;  
+                animation-delay: 3.5s; 
+                opacity: 0;
+                cursor: none;
+            }
+
+            @keyframes buton {
+                0% {opacity: 0;}
+                100% {opacity: 1;}
+            }
+
+            .comp-button:active {
+                background-color: rgb(186, 196, 191);
+                transform: translateY(4px);
+                animation-duration: 1.5s;
+            }
+            .comp-button:hover {
+                font-size: larger;
+                opacity: 0.92;
+                transform: translateY(4px);
+                box-shadow: 0 12px 16px 0 rgb(0, 0, 0),0 17px 50px 0 rgb(0, 0, 0) 
+            }
+
+            .comp-button:after, .comp-button:before, .multi-button:after, .multi-button:before, .leader-button:after, .leader-button:before {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                transition: all 0.4s, opacity 0.1s 0.4s;
+                opacity: 0;
+            }
+
+            .comp-button:after, .multi-button:after, .leader-button:after {
+                bottom: 0;
+                right: 0;
+                border-bottom: 3px solid #212121;
+                border-right: 3px solid #212121;
+            }
+
+            .comp-button:before, .multi-button:before, .leader-button:before {
+                top: 0;
+                left: 0;
+                border-top: 3px solid #212121;
+                border-left: 3px solid #212121;
+            }
+            
+            .comp-button:hover:after, .comp-button:hover:before, .multi-button:hover:after, .multi-button:hover:before, .leader-button:hover:after, .leader-button:hover:before {
+                width: calc(100% + 9px);
+                height: calc(100% + 9px);
+                transition: 0.4s opacity 0.1s;
+                opacity: 1;
+            }
+            
+            .multi-button {
+                color: black;
+                padding: 30px;
+                position: relative;
+                display: block;
+                left: 570px;
+                width: 25%;
+                font-family: 'Lucida Sans';
+                background-color: #9e1b32; 
+                text-decoration: solid;
+                border: none;
+                margin-top: 10px;
+                margin-bottom: 30px;
+                gap: initial;
+                text-shadow: 0px 3px rgba(0, 0, 0, 0.155);
+                font-size: large;
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+                animation: buton 3s forwards; 
+                animation-delay: 3.7s;
+                opacity: 0; 
+                cursor: none;
+            }
+            .multi-button:active {
+                background-color: rgb(186, 196, 191);
+                transform: translateY(4px);
+                animation-duration: 1.5s;
+            }
+            .multi-button:hover{
+                font-size: larger;
+                opacity: 0.92;
+                transform: translateY(4px);
+                box-shadow: 0 12px 16px 0 rgb(0, 0, 0),0 17px 50px 0 rgb(0, 0, 0)
+            }
+
+            .leader-button {
+                color: black;
+                padding: 30px;
+                position: relative;
+                display: block;
+                left: 570px;
+                width: 25%;
+                font-family: 'Lucida Sans';
+                background-color: #9e1b32; 
+                text-decoration: solid;
+                border: none;
+                margin-top: 10px;
+                margin-bottom: 30px;
+                gap: initial;
+                text-shadow: 0px 3px rgba(0, 0, 0, 0.155);
+                font-size: large;
+                box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+                animation: buton 3s forwards; 
+                animation-delay: 3.8s; 
+                opacity: 0;
+                cursor: none;
+            }
+            .leader-button:active {
+                background-color: rgb(186, 196, 191);
+                transform: translateY(4px);
+                animation-duration: 1.5s;
+            }
+            .leader-button:hover {
+                font-size: larger;
+                opacity: 0.92;
+                transform: translateY(4px);
+                box-shadow: 0 12px 16px 0 rgb(0, 0, 0),0 17px 50px 0 rgb(0, 0, 0) 
+            }
+
+            .mute-btn {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+            }
+
+            .title_container {
+                position: absolute;
+                display: block;
+                font-weight: bold;
+                height: auto;
+                margin-top: 30px;
+                margin-bottom:40px;
+                font-family: 'Impact';
+                text-align: center;
+                font-size: 80px;
+                width: 100%;
+                overflow: hidden;
+                margin-bottom: 20px;
+                white-space: nowrap;
+                animation: appear 1s ease forwards;
+                opacity: 0;
+                line-height: 1.1;
+                top: 8%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                animation-delay: 3.15s;
+            }
+
+            .title_container span {
+                justify-content: center;
+                letter-spacing: -1px;
+                font-weight: bold;
+                animation: anime 7s ease-in-out infinite;
+            }
+
+            .rrr {
+                font-size: 140px;
+                color: #9e1b32;
+                vertical-align: bottom; /* Align bottom with the rest of the text */
+                line-height: 0.9; /* Optional tweak */
+                display: inline-block;
+                transform: translateY(10px); /* Nudges it down like a drop cap */
+            }
+
+            @keyframes anime {
+            0%   { filter: blur(0); }
+            5%   { filter: blur(4px); }
+            10%  { filter: blur(0);}
+
+            22%  { filter: blur(3px); }
+            27%  { filter: blur(0); }
+
+            40%  { filter: blur(6px); }
+            42%  { filter: blur(0); }
+
+            100% { filter: blur(0); }
+            }
+
+            @keyframes appear {
+                0% {opacity: 0;}
+                100% {opacity: 1;}
+            }
+            
+            .para_container {
+                display: block;
+                text-align: center;
+                font-size: 1.5rem;
+                font-family: 'monospace';
+                overflow: hidden;
+                width: 100%;
+                border-right: 15px solid;
+                white-space: nowrap;
+                right: 50%; 
+                margin-top: 180px;              
+                animation: gogo .8s steps(100, end) forwards,
+                blink 1s step-end infinite;
+                animation-delay: 3.2s;
+                opacity: 0;
+            }
+            
+            @keyframes gogo {
+                from {
+                    width: 10%;
+                }
+                to {
+                    width: 100%;
+                    opacity: 100%;
+                }
+            }
+
+            @keyframes blink {
+                50% {
+                    border-color: transparent;
+                }
+            }
+            .done {
+                border-right:none;
+                opacity: 100%;
+                animation: none;
+            }
+            .mute, .muted {
+                padding: 0px;
+                border: none;
+                cursor: not-allowed;
+                border-radius: 50%;
+                width: 45px;
+                height: 45px;
+                position: fixed;
+                bottom: 20px; 
+                right: 20px; 
+                overflow: hidden;
+            }
+            .mute img{
+                margin-top: 2.5px;
+                width: 40px;
+                height: 40px;
+                object-fit: contain;
+                transform: scale(1.2);
+                filter: grayscale(0%);
+            }
+            .muted img{
+                margin-top: 2.5px;
+                width: 40px;
+                height: 40px;
+                object-fit: contain;
+                transform: scale(1.2);
+                filter: grayscale(100%);
+            }
+
+        </style>
+        
+        <h1 class = "counter">0</h1>
+        <div class = "overlay">
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+            <div class = "bar"></div>
+        </div>
+
+        <div class ='title_container'>
+        <span class = 'rrr'><b>R </b></span>    
+        <span><b><u> U </u></b></span>   
+        <span><b><u> S </u></b></span>
+        <span><b><u> S </u></b></span>   
+        <span><b><u>I </u></b></span>   
+        <span><b><u> A </u></b></span>   
+        <span><b><u> N </u></b></span>
+        <span><b><u>- R </u></b></span>   
+        <span><b><u> O </u></b></span>   
+        <span><b><u> U </u></b></span>      
+        <span><b><u> L </u></b></span>   
+        <span><b><u> E </u></b></span>   
+        <span><b><u> T </u></b></span>   
+        <span><b><u> T </u></b></span>   
+        <span><b><u> E </u></b></span>    
+        </div>   
+    </head>
+    <div>
+    <body class = "body">
+        <p id ='para_container' class = 'para_container'> This game is not just a game, its life or death. Either you win and u get to live for the next round or u die point blank.<br>
+                                    This isn't just about luck, this is fate and if you want to survive, you play and pray the chamber isn't loaded or you run <br>
+                                    and never come back here again.
+        </p>
+    </div>
+
+        <button title = 'Play Against Computer' class ='comp-button' text-align ='center' id ='single' onclick ='clicked();
+        toss();
+        window.location.href = "single-player.html";
+        '>
+           <b> SINGLE-PLAYER </b>
+        </button>
+
+        <button title = 'Play With Friends/Online' class ='multi-button' text-align ='center' id ='multi' onclick ='clicked();'>
+            <b> MULTI-PLAYER </b>
+        </button>
+
+        <button title = 'check out the leaderboard' class ='leader-button' text-align ='center' id ='leader' onclick ='clicked();
+        '>
+            <b> LEADERBOARD </b>
+        </button>
+
+        <audio id ="start-music" loop>
+            <source src ="sound/aylex.mp3" type ="audio/mp3">
+        </audio>
+        <audio id ='clicking' preload = auto>
+            <source src ="sound/coc1.mp3" type ="audio/mp3">
+        </audio>
+        <audio id ='gunshot' preload = auto>
+            <source src ='' type ='audio/mp3'>
+        </audio>
+        <div class = 'music-mute'>
+        <button id = muty class = 'mute' onclick = '
+            var ch = document.getElementById("muty");
+            if (ch.classList.contains("mute")){
+                ch.classList.remove("mute");
+                ch.classList.add("muted");
+                audio.pause();
+            } 
+            else if (ch.classList.contains("muted")){
+                ch.classList.remove("muted");
+                ch.classList.add("mute");
+                audio.play();
+            }'>    
+            <img src ="image/musica.png" alt ="mute" width="65" height="65"/>
+        </button>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script>
+
+            function startLoader() {
+                let counterElement = document.querySelector(".counter");
+                let currentValue = 0;
+
+                function updateCounter() {
+                    if (currentValue === 100){
+                        return;
+                    }
+                    currentValue += Math.floor(Math.random() * 10) + 4;
+                    if (currentValue > 100) {
+                        currentValue = 100;
+                    }
+                    counterElement.textContent = currentValue;
+                    let delay = Math.floor(Math.random() * 200) + 50;
+                    setTimeout(updateCounter, delay);
+                }
+                updateCounter();
+            }
+            startLoader();
+            gsap.to(".counter", 0.25, {
+                delay: 2.699,
+                opacity: 0,
+                pointerEvents: "none",
+            });
+            
+            gsap.to(".bar", 1.5, {
+                delay: 1.5,
+                height: 0,
+                stagger: {amount: 0.5,},
+                ease: "power4.inOut",
+            });
+
+            gsap.to(".overlay", {
+            delay: 3.59,
+            opacity: 0,
+            pointerEvents: "none",
+            onComplete: () => {
+                document.querySelector(".overlay").remove();
+            } });
+        
+            const el = document.getElementById("para_container");
+            // Wait for typing animation (3s in this example), then remove the cursor
+            el.addEventListener("animationend", function(event) {
+            if (event.animationName === "gogo") {
+                el.classList.add("done");
+            }
+            });
+
+            function clicked() {
+                clicking.play();
+            }
+
+            function toss() {
+                const start = Math.floor(Math.random()*10);
+                if (start > 5) {
+                    alert('You First.');
+                    var you = [1,3,5];
+                    var oppon = [2,4,6];
+                } else {
+                    alert('Your Opponent will go First.');
+                    var oppon = [1,3,5];
+                    var you = [2,4,6];
+                }
+            localStorage.setItem('you', JSON.stringify(you));
+            console.log(localStorage.getItem('you'));
+            localStorage.setItem('oppon', JSON.stringify(oppon));
+            console.log(localStorage.getItem('oppon'));
+            }
+        </script>
+        <script>
+            const toro = document.querySelector('.comp-button');
+            const audio = document.getElementById('start-music');
+            toro.addEventListener('animationstart', () => {
+                audio.play();
+            });
+        </script>
+    </body>
+</html>
