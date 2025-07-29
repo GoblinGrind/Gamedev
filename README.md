@@ -3,7 +3,7 @@ A journey into indie game development
 
 🕹️ About the Game
 Russian Roulette is a high-stakes, single-player psychological game where survival is a coin toss... with a revolver.
-Play smart, spin the chamber, and see if fate smiles—or pulls the trigger.
+Play smart, spin the chamber, and see if fate smiles—or pulls the trigger. (WORK IN PROGRESS)
 
 This isn't about luck. It's about how far you're willing to go when the stakes are life and death.
 Win, and live to play another round. Lose, and the game ends—permanently.
